@@ -1,5 +1,7 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html;charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 
 <html>
 <title>用户信息</title>
@@ -42,25 +44,26 @@
 	</script>
 </head>
 <body>
-<h2>Hello World!</h2>
 <div>
 	<input type="button" id="adduser" value="新增" onclick="addUser()"/>
 	<table>
 		<th>
-			<td>ID</td>
 			<td>姓名</td>
-			<td>密码</td>
-			<td>年龄</td>
 			<td>性别</td>
+			<td>年龄</td>
+			<td>状态</td>
+			<td>创建时间</td>
+			<td>更新时间</td>
 			<td>操作</td>
 		</th>
 		<c:forEach items="${list}" var ="user">
 			<tr>
-				<td>${user.id}</td>
-				<td>${user.name}</td>
-				<td>${user.password}</td>
-				<td>${user.age}</td>
+				<td>${user.userName}</td>
 				<td>${user.sex}</td>
+				<td>${user.age}</td>
+				<td>${user.status}</td>
+				<td><fmt:formatDate value="${user.createTime}" pattern="yyyy-MM-dd"/> </td>
+				<td><fmt:formatDate value="${user.updateTime}" pattern="yyyy-MM-dd"/></td>
 				<td>
 					<input type="button" value="查看" onclick="showDetail(${user.id})">
 					<input type="button" value="修改" onclick="updateUser(${user.id})">
