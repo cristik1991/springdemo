@@ -4,6 +4,7 @@ import com.cristik.business.entity.svo.User;
 import com.cristik.framework.exception.BusinessException;
 import com.cristik.framework.base.BaseController;
 import com.cristik.business.service.UserService;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 /**
@@ -24,8 +29,22 @@ public class UserController extends BaseController{
     @Autowired
     UserService userService;
 
+    @RequestMapping("/tologin")
+    public String toLogin(HttpServletRequest request, HttpServletResponse response,ModelMap model){
+        String params = request.getParameter("params");
+        if(StringUtils.isNotBlank(params)){
+            try {
+                params = URLDecoder.decode(params,"utf-8");
+            } catch (UnsupportedEncodingException e) {
+                logger.error("登录拦截跳转参数异常",e);
+            }
+        }
+        System.out.println(params);
+        model.put("url",params);
+        return "/user/login";
+    }
+
     /**
-     *
      * 查询所有用户列表
      */
     @RequestMapping("/list")

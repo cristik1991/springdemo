@@ -3,6 +3,7 @@ package com.cristik.business.service;
 import com.cristik.business.dao.UserMapper;
 import com.cristik.business.entity.svo.User;
 import com.cristik.framework.base.Result;
+import com.cristik.framework.base.SessionHelper;
 import com.cristik.framework.exception.BusinessException;
 import com.github.pagehelper.PageHelper;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -69,8 +70,12 @@ public class UserService {
         boolean flag = false;
         if(StringUtils.isNotBlank(user.getUserName())){
             if(StringUtils.isNotBlank(user.getPassword())){
+                user.setPassword(DigestUtils.md5Hex(user.getPassword().getBytes()));
                 List<User> list = userMapper.select(user);
                 if(list.size()==1){
+                    User loginUser = list.get(0);
+                    loginUser.setPassword("");
+                    SessionHelper.put(loginUser);
                     flag = true;
                 }else{
                     throw new BusinessException("用户名密码不存在");

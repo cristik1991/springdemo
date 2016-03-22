@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/user")
 public class UserAction  extends BaseAction{
     @Autowired
-    UserService userservice;
+    UserService userService;
 
     @RequestMapping("/index")
     public String index(){
@@ -31,7 +31,7 @@ public class UserAction  extends BaseAction{
     @ResponseBody
     @RequestMapping("/registeruser")
     public String registerUser(@RequestBody User user) throws BusinessException {
-        boolean flag = userservice.insert(user);
+        boolean flag = userService.insert(user);
         if(flag){
             return success("注册成功");
         }else{
@@ -41,10 +41,26 @@ public class UserAction  extends BaseAction{
     }
 
 
-
-    @RequestMapping("/")
+    /**
+     * 用户登录
+     * @param user
+     * @return
+     * @throws BusinessException
+     */
+    @ResponseBody
+    @RequestMapping("/login")
     public String login(@RequestBody User user) throws BusinessException {
-        return null;
+        boolean flag =false;
+        if(user!=null){
+            flag = userService.login(user);
+        }else{
+            throw new BusinessException("登录异常");
+        }
+        if(flag){
+            return success("登录成功");
+        }else{
+            return error("登录失败");
+        }
     }
 
 
@@ -52,7 +68,7 @@ public class UserAction  extends BaseAction{
     @ResponseBody
     @RequestMapping("/detail/{id}")
     public String getUserById(@PathVariable("id") String id){
-        User user = userservice.getUserById(id);
+        User user = userService.getUserById(id);
         System.out.println(user);
         return "";
     }
