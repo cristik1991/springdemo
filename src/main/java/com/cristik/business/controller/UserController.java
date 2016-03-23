@@ -46,6 +46,8 @@ public class UserController extends BaseController{
 
     /**
      * 查询所有用户列表
+     * @param model
+     * @return
      */
     @RequestMapping("/list")
     public String getUserList( ModelMap model){
@@ -55,15 +57,20 @@ public class UserController extends BaseController{
     }
 
     /**
-     *分页查询用户信息
+     * 分页查询用户信息
+     * @param model
+     * @return
      */
     @RequestMapping("/pagelist")
     public String getUserListByPage(ModelMap model){
         return "/user/userpage";
     }
 
-    /*
-     *查询用户详情
+    /**
+     * 查询用户详情
+     * @param id
+     * @param model
+     * @return
      */
     @RequestMapping("/detail")
     public String getUserById(String id, ModelMap model){
@@ -72,16 +79,20 @@ public class UserController extends BaseController{
         return "/user/userdetail";
     }
 
-    /*
-     *跳转到新增用户
+    /**
+     * 跳转到新增用户
+     * @return
      */
     @RequestMapping("/toadduser")
     public String toAddUser(){
         return "/user/adduser";
     }
 
-    /*
-     *新增用户
+    /**
+     * 新增用户
+     * @param user
+     * @return
+     * @throws BusinessException
      */
     @RequestMapping("/adduser")
     public String addUser(User user)throws BusinessException{
@@ -89,10 +100,12 @@ public class UserController extends BaseController{
         return "redirect:/user/list";
     }
 
-    /*
-     *删除用户
+    /**
+     * 删除用户
      * produces = "text/html;charset=UTF-8"解决返回json中文乱码
-     *
+     * @param id
+     * @param model
+     * @return
      */
     @ResponseBody
     @RequestMapping(value="/deleteuser")
@@ -106,8 +119,11 @@ public class UserController extends BaseController{
         }
     }
 
-    /*
-     *跳转到修改用户
+    /**
+     * 跳转到修改用户
+     * @param id
+     * @param model
+     * @return
      */
     @RequestMapping("/toupdateuser")
     public String toUpdateUser(String id,ModelMap model){
@@ -116,8 +132,10 @@ public class UserController extends BaseController{
         return "/user/updateuser";
     }
 
-    /*
-     *修改用户
+    /**
+     * 修改用户
+     * @param user
+     * @return
      */
     @RequestMapping("/updateuser")
     public String updateUser(User user){
