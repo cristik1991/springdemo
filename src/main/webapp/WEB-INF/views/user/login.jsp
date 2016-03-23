@@ -32,6 +32,7 @@
 		<label>密码</label><input type="password" name="password"/>
 	</form>
 	<input type="button" id="submit" value="登录"/>
+	<input type="button" value="注册" onclick="window.location.href='${base}/user/toregister'">
 </div>
 </body>
 </html>
