@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,7 +30,78 @@ public class UserController extends BaseController{
     @Autowired
     UserService userService;
 
-    @RequestMapping("/tologin")
+    /**
+     * 跳转到新增用户
+     * @return
+     */
+    @RequestMapping("/toregister")
+    public String toRegisterUser(){
+        return "/user/userregister";
+    }
+
+    /**
+     * 用户注册
+     * @param user
+     * @return
+     * @throws BusinessException
+     */
+    @RequestMapping("/rigister")
+    public String registerUser(User user)throws BusinessException{
+        userService.insert(user);
+        return "redirect:/user/list";
+    }
+
+    /**
+     * 删除用户
+     * produces = "text/html;charset=UTF-8"解决返回json中文乱码
+     * @param id
+     * @param model
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value="/deleteuser")
+    public String deleteUserById(String id, ModelMap model) {
+        boolean flag = userService.deleteUser(id);
+        if (flag) {
+            return success("success删除成功");
+
+        } else {
+            return error("删除失败");
+        }
+    }
+
+    /**
+     * 跳转到修改用户
+     * @param id
+     * @param model
+     * @return
+     */
+    @RequestMapping("/toupdateuser")
+    public String toUpdateUser(String id,ModelMap model){
+        User user = userService.getUserById(id);
+        model.put("user",user);
+        return "/user/updateuser";
+    }
+
+    /**
+     * 修改用户
+     * @param user
+     * @return
+     */
+    @RequestMapping("/updateuser")
+    public String updateUser(User user){
+        userService.updateUser(user);
+        return "redirect:/user/list";
+    }
+
+    /**
+     * 用户登录
+     * @param request
+     * @param response
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/tologin")
     public String toLogin(HttpServletRequest request, HttpServletResponse response,ModelMap model){
         String params = request.getParameter("params");
         if(StringUtils.isNotBlank(params)){
@@ -78,70 +150,4 @@ public class UserController extends BaseController{
         model.put("user",user);
         return "/user/userdetail";
     }
-
-    /**
-     * 跳转到新增用户
-     * @return
-     */
-    @RequestMapping("/toadduser")
-    public String toAddUser(){
-        return "/user/adduser";
-    }
-
-    /**
-     * 新增用户
-     * @param user
-     * @return
-     * @throws BusinessException
-     */
-    @RequestMapping("/adduser")
-    public String addUser(User user)throws BusinessException{
-        userService.insert(user);
-        return "redirect:/user/list";
-    }
-
-    /**
-     * 删除用户
-     * produces = "text/html;charset=UTF-8"解决返回json中文乱码
-     * @param id
-     * @param model
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value="/deleteuser")
-    public String deleteUserById(String id, ModelMap model) {
-        boolean flag = userService.deleteUser(id);
-        if (flag) {
-            return success("success删除成功");
-
-        } else {
-            return error("删除失败");
-        }
-    }
-
-    /**
-     * 跳转到修改用户
-     * @param id
-     * @param model
-     * @return
-     */
-    @RequestMapping("/toupdateuser")
-    public String toUpdateUser(String id,ModelMap model){
-        User user = userService.getUserById(id);
-        model.put("user",user);
-        return "/user/updateuser";
-    }
-
-    /**
-     * 修改用户
-     * @param user
-     * @return
-     */
-    @RequestMapping("/updateuser")
-    public String updateUser(User user){
-        userService.updateUser(user);
-        return "redirect:/user/list";
-    }
-
-
 }
