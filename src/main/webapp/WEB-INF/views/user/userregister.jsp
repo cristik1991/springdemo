@@ -15,13 +15,12 @@
 <h2>Hello World!</h2>
 <div>
 	<form id="form1" method="post" action="${base}/user/adduser">
-		<label>ID</label><input type="text" name="id"/>
 		<label>用户名</label><input type="text" name="name"/>
-		<label>密码</label><input type="text" name="password"/>
+		<label>密码</label><input type="password" name="password"/>
 		<label>年龄</label><input type="text" name="age"/>
 		<label>性别</label><input type="text" name="sex"/>
 	</form>
-	<input type="button" id="submit" value="保存"/>
+	<input type="button" id="submit" value="注册"/>
 </div>
 </body>
 </html>
