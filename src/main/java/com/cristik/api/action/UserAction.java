@@ -37,9 +37,7 @@ public class UserAction  extends BaseAction{
         }else{
             return success("注册失败");
         }
-
     }
-
 
     /**
      * 用户登录
@@ -63,8 +61,25 @@ public class UserAction  extends BaseAction{
         }
     }
 
+    /**
+     * 用户登出
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/logout")
+    public String logout(){
+        if(userService.logout()){
+            return success("用户已退出");
+        }else{
+            return error("退出失败");
+        }
+    }
 
-
+    /**
+     * 用户资料
+     * @param id
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/detail/{id}")
     public String getUserById(@PathVariable("id") String id){
