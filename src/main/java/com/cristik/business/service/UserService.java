@@ -22,6 +22,11 @@ public class UserService {
     @Autowired
     UserMapper userMapper;
 
+    /**
+     * 根据主键查用户
+     * @param id
+     * @return
+     */
     public User getUserById(String id) {
         User user = new User();
         user.setId(id);
@@ -29,11 +34,18 @@ public class UserService {
         return user;
     }
 
+    /**
+     * 查找所有用户列表
+     * @return
+     */
     public List<User> getUserList() {
         List<User> list = userMapper.selectAll();
         return list;
     }
 
+    /**
+     * 分页查询用户信息
+     */
     public void getUserByPage() {
         PageHelper.startPage(1, 10);
         List<User> list = userMapper.selectAll();
@@ -66,6 +78,12 @@ public class UserService {
         }
     }
 
+    /**
+     * 用户登录
+     * @param user
+     * @return
+     * @throws BusinessException
+     */
     public boolean login(User user) throws BusinessException {
         boolean flag = false;
         if(StringUtils.isNotBlank(user.getUserName())){
@@ -89,6 +107,20 @@ public class UserService {
         return flag;
     }
 
+    /**
+     * 用户退出
+     * @return
+     */
+    public boolean logout(){
+        SessionHelper.remove();
+        return true;
+    }
+
+    /**
+     * 删除用户
+     * @param id
+     * @return
+     */
     public boolean deleteUser(String id) {
         Integer num = userMapper.deleteByPrimaryKey(id);
         boolean flag = false;
@@ -98,6 +130,11 @@ public class UserService {
         return flag;
     }
 
+    /**
+     * 更新用户
+     * @param user
+     * @return
+     */
     public boolean updateUser(User user) {
         int num = userMapper.updateByPrimaryKey(user);
         boolean flag = false;
