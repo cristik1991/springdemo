@@ -23,6 +23,12 @@
 
 	<!-- 异常统一处理 -->
 	<bean id="exceptionHandler" class="com.cristik.framework.exception.MessageExceptionHandler"/>
+	<!--文件上传-->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8"></property>
+		<property name="maxUploadSize" value="10485760000"></property>
+		<property name="maxInMemorySize" value="40960"></property>
+	</bean>
 
 	<!-- 导入mybatis配置-->
 	<import resource="classpath*:/spring-mybatis.xml"/>
