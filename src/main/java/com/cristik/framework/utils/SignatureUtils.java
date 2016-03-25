@@ -1,4 +1,4 @@
-package com.cristik.framework.util;
+package com.cristik.framework.utils;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -11,7 +11,7 @@ import java.util.TreeMap;
 /**
  * Created by zhenghua on 2016/3/23.
  */
-public class Signature {
+public class SignatureUtils {
     /**
      * 签名生成算法
      * @param  params 请求参数集，所有参数必须已转换为字符串类型
