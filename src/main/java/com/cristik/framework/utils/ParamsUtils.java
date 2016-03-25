@@ -1,4 +1,4 @@
-package com.cristik.framework.util;
+package com.cristik.framework.utils;
 
 import org.apache.commons.lang.StringUtils;
 
