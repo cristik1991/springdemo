@@ -1,4 +1,4 @@
-package com.cristik.framework.util;
+package com.cristik.framework.utils;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
@@ -8,7 +8,7 @@ import java.io.IOException;
 /**
  * Created by zhenghua on 2016/3/21.
  */
-public class Base64Util {
+public class Base64Utils {
     /**
      * 解密
      * @param key
