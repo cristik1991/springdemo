@@ -2,7 +2,7 @@ package com.cristik.framework.interceptor;
 
 
 import com.cristik.framework.base.SessionHelper;
-import com.cristik.framework.util.ParamsUtils;
+import com.cristik.framework.utils.ParamsUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
