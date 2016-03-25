@@ -1,16 +1,15 @@
 package com.cristik.business.controller;
 
 import com.cristik.business.entity.svo.User;
-import com.cristik.framework.exception.BusinessException;
-import com.cristik.framework.base.BaseController;
 import com.cristik.business.service.UserService;
+import com.cristik.framework.base.BaseController;
+import com.cristik.framework.exception.BusinessException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
