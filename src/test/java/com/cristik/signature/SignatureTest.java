@@ -1,6 +1,6 @@
 package com.cristik.signature;
 
-import com.cristik.framework.util.Signature;
+import com.cristik.framework.utils.SignatureUtils;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
 
@@ -23,7 +23,7 @@ public class SignatureTest {
         map.put("Timestamp","1408704141");
         map.put("instanceIds.0","qcvm12345");
         map.put("instanceIds.1","qcvm56789");
-        String signature = Signature.getSignature(map,SecretKey);
+        String signature = SignatureUtils.getSignature(map,SecretKey);
     }
 
     @Test
