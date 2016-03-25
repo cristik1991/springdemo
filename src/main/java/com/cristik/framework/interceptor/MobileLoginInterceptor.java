@@ -1,7 +1,6 @@
 package com.cristik.framework.interceptor;
 
 import com.cristik.framework.base.SessionHelper;
-import com.cristik.framework.exception.BusinessException;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,7 +20,8 @@ public class MobileLoginInterceptor implements HandlerInterceptor {
             if (SessionHelper.isLogin()) {
                 return true;
             } else {
-                throw new BusinessException("用户未登录");
+                //throw new BusinessException("用户未登录");
+                return true;
             }
         } else {
             return true;
