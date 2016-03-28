@@ -2,7 +2,6 @@ package com.cristik.business.service;
 
 import com.cristik.business.dao.UserMapper;
 import com.cristik.business.entity.svo.User;
-import com.cristik.framework.base.Result;
 import com.cristik.framework.base.SessionHelper;
 import com.cristik.framework.exception.BusinessException;
 import com.github.pagehelper.PageHelper;
@@ -58,6 +57,11 @@ public class UserService {
      * @throws BusinessException
      */
     public boolean insert(User user) throws BusinessException {
+        User qUser = new User();
+        qUser.setUserName(user.getUserName());
+        if(userMapper.selectOne(qUser)!=null){
+            throw new BusinessException("用户已被注册");
+        }
         user.setStatus(1);
         user.setEnable("Y");
         user.setCreateTime(new Date());
@@ -72,6 +76,7 @@ public class UserService {
         }
         int id = userMapper.insert(user);
         if (id == 1) {
+            SessionHelper.put(user);
             return true;
         } else {
             return false;
