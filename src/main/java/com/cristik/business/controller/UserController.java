@@ -3,12 +3,14 @@ package com.cristik.business.controller;
 import com.cristik.business.entity.svo.User;
 import com.cristik.business.service.UserService;
 import com.cristik.framework.base.BaseController;
+import com.cristik.framework.base.SessionHelper;
 import com.cristik.framework.exception.BusinessException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -35,7 +37,7 @@ public class UserController extends BaseController{
      */
     @RequestMapping("/toregister")
     public String toRegisterUser(){
-        return "/user/userregister";
+        return "/user/register";
     }
 
     /**
@@ -44,10 +46,12 @@ public class UserController extends BaseController{
      * @return
      * @throws BusinessException
      */
-    @RequestMapping("/rigister")
-    public String registerUser(User user)throws BusinessException{
+    @ResponseBody
+    @RequestMapping("/register")
+    public String registerUser(@RequestBody User user) throws BusinessException {
         userService.insert(user);
-        return "redirect:/user/list";
+
+        return success("用户注册成功");
     }
 
     /**
@@ -112,6 +116,16 @@ public class UserController extends BaseController{
         }
         System.out.println(params);
         model.put("url",params);
+        return "/user/login";
+    }
+
+    /**
+     * 用户登出
+     * @return
+     */
+    @RequestMapping("/logout")
+    public String logout(){
+        userService.logout();
         return "/user/login";
     }
 
