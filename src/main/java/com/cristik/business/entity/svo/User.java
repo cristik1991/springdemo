@@ -14,6 +14,8 @@ public class User {
     @Column
     private String password;
     @Column
+    private String email;
+    @Column
     private String sex;
     @Column
     private Integer age;
@@ -26,10 +28,11 @@ public class User {
     @Column
     private Date updateTime;
 
-    public User(String id, String userName, String password, String sex, Integer age, Integer status, String enable, Date createTime, Date updateTime) {
+    public User(String id, String userName, String password,String eamil, String sex, Integer age, Integer status, String enable, Date createTime, Date updateTime) {
         this.id = id;
         this.userName = userName;
         this.password = password;
+        this.email = email;
         this.sex = sex;
         this.age = age;
         this.status = status;
@@ -64,6 +67,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getSex() {
@@ -117,9 +128,10 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
                 ", sex='" + sex + '\'' +
                 ", age=" + age +
                 ", status=" + status +
