@@ -64,6 +64,8 @@
 			<mvc:exclude-mapping path="/user/logout"/>
 			<mvc:exclude-mapping path="/user/toregister"/>
 			<mvc:exclude-mapping path="/user/register"/>
+			<mvc:exclude-mapping path="/user/checkusername"/>
+			<mvc:exclude-mapping path="/user/checkemail"/>
 			<bean class="com.cristik.framework.interceptor.WebLoginInterceptor" />
 		</mvc:interceptor>
 		<mvc:interceptor>
