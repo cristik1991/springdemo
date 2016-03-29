@@ -10,27 +10,28 @@
 </head>
 <body class="hold-transition register-page">
 <div class="register-box">
-	<%--<div class="register-logo">
-		<a href="${base}/static/adminlte-2.3.0/index2.html"><b>Admin</b>LTE</a>
-	</div>--%>
 
 	<div class="register-box-body">
 		<p class="login-box-msg">账户注册</p>
-		<form id="form" action="${base}/user/register" method="post">
+		<form id="form" action="${base}/user/register" method="post" class="register-form">
 			<div class="form-group has-feedback">
-				<input type="text" class="form-control" id="username" name="userName" placeholder="用户名">
+				<input type="text" class="form-control" id="username" name="userName" placeholder="用户名"
+					   datatype="*4-16" ajaxurl="${base}/user/checkusername" sucmsg="可以使用" nullmsg="用户名不能为空" errormsg="请输入4-16位字符" >
 				<span class="glyphicon glyphicon-user form-control-feedback"></span>
 			</div>
 			<div class="form-group has-feedback">
-				<input type="email" class="form-control" id="email" name="email" placeholder="邮箱">
+				<input type="email" class="form-control" id="email" name="email" placeholder="邮箱"
+				datatype="e" ajaxurl="${base}/user/checkemail" nullmsg="邮箱不能为空" sucmsg="邮箱可以使用" errormsg="邮箱格式不正确" >
 				<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 			</div>
 			<div class="form-group has-feedback">
-				<input type="password" class="form-control" id="pwd" name="password" placeholder="密码">
+				<input type="password" class="form-control" id="pwd" name="password" placeholder="密码"
+				datatype="*6-16" sucmsg="密码格式正确" nullmsg="密码不能为空" errormsg="密码范围6-16位之间">
 				<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 			</div>
 			<div class="form-group has-feedback">
-				<input type="password" class="form-control" id="repeat-pwd" placeholder="重复密码">
+				<input type="password" class="form-control" id="repeat-pwd" placeholder="重复密码"
+				datatype="*" recheck="password" sucmsg="密码一致" errormsg="两次密码输入不一致">
 				<span class="glyphicon glyphicon-log-in form-control-feedback"></span>
 			</div>
 			<div class="row">
@@ -52,44 +53,35 @@
 			<a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Google+账号登陆</a>
 		</div>
 
-		<a href="login.html" class="text-center">已有账户</a>
+		<a href="${base}/user/tologin" class="text-center">已有账户</a>
 	</div>
 </div>
-
-
-<script src="${base}/static/adminlte-2.3.0/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-
-<script src="${base}/static/adminlte-2.3.0/bootstrap/js/bootstrap.min.js"></script>
-
 <script src="${base}/static/adminlte-2.3.0/plugins/iCheck/icheck.min.js"></script>
 <script>
 	$(function () {
 
-		$("#register").click(function () {
-
-			if(!$("#username").val()){
-				alert("用户名不能为空");
-				return;
-			}
-			if(!$("#email").val()){
-				alert("联系邮箱不能为空");
-				return;
-			}
-			if(!$("#pwd").val()){
-				alert("密码不能为空");
-				return;
-			}
-			if(!$("#repeat-pwd").val()){
-				alert("重复密码不能为空");
-				return;
-			}
-			if($("#pwd").val()!=$("#repeat-pwd").val()){
-				alert("两次密码必须一直");
-				return;
-			}
-			//$("#form").submit();
-			test();
+		$('input').iCheck({
+			checkboxClass: 'icheckbox_square-blue',
+			radioClass: 'iradio_square-blue',
+			increaseArea: '20%' // optional
 		});
+
+		$(".register-form").Validform({
+			btnSubmit:"#register",
+			tiptype:3,
+			ajaxPost:true,
+			beforeCheck:function(curform){
+			},
+			beforeSubmit:function(curform){
+			},
+			callback:function(data){
+				if(data.success){
+					alert(data.msg)
+					window.location.href="${base}/user/list";
+				}
+			}
+		});
+
 
 		function test(){
 			$("#register").click(function(){
@@ -104,8 +96,6 @@
 						window.location.href="${base}/user/list";
 					}
 				})
-
-
 			})
 		}
 
