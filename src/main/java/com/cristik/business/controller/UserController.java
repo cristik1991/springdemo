@@ -3,14 +3,12 @@ package com.cristik.business.controller;
 import com.cristik.business.entity.svo.User;
 import com.cristik.business.service.UserService;
 import com.cristik.framework.base.BaseController;
-import com.cristik.framework.base.SessionHelper;
 import com.cristik.framework.exception.BusinessException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -48,9 +46,8 @@ public class UserController extends BaseController{
      */
     @ResponseBody
     @RequestMapping("/register")
-    public String registerUser(@RequestBody User user) throws BusinessException {
+    public String registerUser(User user) throws BusinessException {
         userService.insert(user);
-
         return success("用户注册成功");
     }
 
@@ -66,7 +63,7 @@ public class UserController extends BaseController{
     public String deleteUserById(String id, ModelMap model) {
         boolean flag = userService.deleteUser(id);
         if (flag) {
-            return success("success删除成功");
+            return success("删除成功");
 
         } else {
             return error("删除失败");
@@ -98,7 +95,7 @@ public class UserController extends BaseController{
     }
 
     /**
-     * 用户登录
+     * 跳转到用户登录
      * @param request
      * @param response
      * @param model
@@ -117,6 +114,26 @@ public class UserController extends BaseController{
         System.out.println(params);
         model.put("url",params);
         return "/user/login";
+    }
+
+    /**
+     * 用户登录
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/login")
+    public String login(User user) throws BusinessException {
+        boolean flag =false;
+        if(user!=null){
+            flag = userService.login(user);
+        }else{
+            throw new BusinessException("登录异常");
+        }
+        if(flag){
+            return success("登录成功");
+        }else{
+            return error("登录失败");
+        }
     }
 
     /**
@@ -163,4 +180,37 @@ public class UserController extends BaseController{
         model.put("user",user);
         return "/user/userdetail";
     }
+
+    /**
+     * 校验用户名是否可用
+     * @param userName
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/checkusername")
+    public String checkUserName(String userName){
+        boolean flag = userService.checkUserName(userName);
+        if(flag){
+            return error("已被占用");
+        }else{
+            return success("可以使用");
+        }
+    }
+
+    /**
+     * 校验用户名是否可用
+     * @param email
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/checkemail")
+    public String checkEmail(String email){
+        boolean flag = userService.checkEmail(email);
+        if(flag){
+            return error("已被占用");
+        }else{
+            return success("可以使用");
+        }
+    }
+
 }
