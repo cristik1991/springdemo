@@ -13,6 +13,8 @@ public class Result {
 
     private boolean success;
 
+    private String status;
+
     private String msg;
 
     private String url;
@@ -39,6 +41,14 @@ public class Result {
 
     public void setSuccess(boolean success) {
         this.success = success;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getMsg() {
