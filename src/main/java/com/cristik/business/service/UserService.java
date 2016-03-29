@@ -57,9 +57,7 @@ public class UserService {
      * @throws BusinessException
      */
     public boolean insert(User user) throws BusinessException {
-        User qUser = new User();
-        qUser.setUserName(user.getUserName());
-        if(userMapper.selectOne(qUser)!=null){
+        if(checkUserName(user.getUserName())){
             throw new BusinessException("用户已被注册");
         }
         user.setStatus(1);
@@ -147,6 +145,28 @@ public class UserService {
             flag = true;
         }
         return flag;
+    }
+
+    public boolean checkUserName(String userName){
+        User user = new User();
+        user.setUserName(userName);
+        List<User> list = userMapper.select(user);
+        if(list.size()>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public boolean checkEmail(String email){
+        User user = new User();
+        user.setEmail(email);
+        List<User> list = userMapper.select(user);
+        if(list.size()>0){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }
