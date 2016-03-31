@@ -46,7 +46,7 @@
         <property name="basePackage" value="com.cristik.business.dao"/>
         <property name="properties" >
             <value>
-                ORDER=BEFORE
+                ORDER=AFTER
                 IDENTITY=MYSQL
             </value>
         </property>
