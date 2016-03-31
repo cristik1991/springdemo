@@ -82,7 +82,7 @@ public class UserAction  extends BaseAction{
      */
     @ResponseBody
     @RequestMapping("/detail/{id}")
-    public String getUserById(@PathVariable("id") String id){
+    public String getUserById(@PathVariable("id") Integer id){
         User user = userService.getUserById(id);
         System.out.println(user);
         return "";

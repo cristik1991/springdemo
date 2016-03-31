@@ -1,19 +1,23 @@
 package com.cristik.business.entity.svo;
 
+import javax.persistence.*;
 import java.util.Date;
 
-public class Log {
-    private Long id;
-
-    private Long userid;
-
+@Table(name="operation_log")
+public class OperationLog {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column
+    private String userid;
+    @Column
     private Date createdate;
-
+    @Column
     private String content;
-
+    @Column
     private String operation;
 
-    public Log(Long id, Long userid, Date createdate, String content, String operation) {
+    public OperationLog(Integer id, String userid, Date createdate, String content, String operation) {
         this.id = id;
         this.userid = userid;
         this.createdate = createdate;
@@ -21,23 +25,23 @@ public class Log {
         this.operation = operation;
     }
 
-    public Log() {
+    public OperationLog() {
         super();
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Long getUserid() {
+    public String getUserid() {
         return userid;
     }
 
-    public void setUserid(Long userid) {
+    public void setUserid(String userid) {
         this.userid = userid;
     }
 
@@ -63,5 +67,16 @@ public class Log {
 
     public void setOperation(String operation) {
         this.operation = operation;
+    }
+
+    @Override
+    public String toString() {
+        return "Log{" +
+                "id=" + id +
+                ", userid='" + userid + '\'' +
+                ", createdate=" + createdate +
+                ", content='" + content + '\'' +
+                ", operation='" + operation + '\'' +
+                '}';
     }
 }

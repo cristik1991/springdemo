@@ -22,7 +22,7 @@ public class MybatisTest {
     @Test
     public void testDelete(){
         User user = new User();
-        user.setId("1");
+        user.setId(1);
         int num =userDao.deleteByPrimaryKey(2);
         System.out.println(num);
     }

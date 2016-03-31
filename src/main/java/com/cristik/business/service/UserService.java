@@ -9,6 +9,8 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +19,7 @@ import java.util.List;
  * Created by zhenghua on 2016/3/10.
  */
 @Service
+@Transactional
 public class UserService {
     @Autowired
     UserMapper userMapper;
@@ -26,7 +29,7 @@ public class UserService {
      * @param id
      * @return
      */
-    public User getUserById(String id) {
+    public User getUserById(Integer id) {
         User user = new User();
         user.setId(id);
         user = userMapper.selectOne(user);
@@ -74,7 +77,7 @@ public class UserService {
         }
         int id = userMapper.insert(user);
         if (id == 1) {
-            SessionHelper.put(user);
+            SessionHelper.putUser(user);
             return true;
         } else {
             return false;
@@ -96,7 +99,7 @@ public class UserService {
                 if(list.size()==1){
                     User loginUser = list.get(0);
                     loginUser.setPassword("");
-                    SessionHelper.put(loginUser);
+                    SessionHelper.putUser(loginUser);
                     flag = true;
                 }else{
                     throw new BusinessException("用户名密码不存在");
@@ -124,7 +127,7 @@ public class UserService {
      * @param id
      * @return
      */
-    public boolean deleteUser(String id) {
+    public boolean deleteUser(Integer id) {
         Integer num = userMapper.deleteByPrimaryKey(id);
         boolean flag = false;
         if (num.intValue() == 1) {
@@ -139,7 +142,7 @@ public class UserService {
      * @return
      */
     public boolean updateUser(User user) {
-        int num = userMapper.updateByPrimaryKey(user);
+        int num = userMapper.updateByPrimaryKeySelective(user);
         boolean flag = false;
         if (num == 1) {
             flag = true;

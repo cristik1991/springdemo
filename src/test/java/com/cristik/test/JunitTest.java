@@ -60,7 +60,7 @@ public class JunitTest {
 		List list = new ArrayList<User>();
 		for(int i=0;i<5;i++){
 			User user = new User();
-			user.setId(""+i);
+			user.setId(i);
 			user.setUserName("张飞");
 			user.setPassword("112222");
 			list.add(user);

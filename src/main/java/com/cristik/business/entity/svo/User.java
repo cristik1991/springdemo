@@ -6,9 +6,8 @@ import java.util.Date;
 @Table(name="user")
 public class User {
     @Id
-    @Column
-    @GeneratedValue(generator = "UUID")
-    private String id;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Integer id;
     @Column
     private String userName;
     @Column
@@ -28,7 +27,7 @@ public class User {
     @Column
     private Date updateTime;
 
-    public User(String id, String userName, String password,String eamil, String sex, Integer age, Integer status, String enable, Date createTime, Date updateTime) {
+    public User(Integer id, String userName, String password,String email, String sex, Integer age, Integer status, String enable, Date createTime, Date updateTime) {
         this.id = id;
         this.userName = userName;
         this.password = password;
@@ -45,11 +44,11 @@ public class User {
         super();
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

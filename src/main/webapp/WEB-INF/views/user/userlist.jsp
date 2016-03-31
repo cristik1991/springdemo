@@ -100,9 +100,9 @@
 											<td><fmt:formatDate value="${user.createTime}" pattern="yyyy-MM-dd"/> </td>
 											<td><fmt:formatDate value="${user.updateTime}" pattern="yyyy-MM-dd"/></td>
 											<td>
-												<input type="button" value="查看" onclick="showDetail('${user.id}')">
-												<input type="button" value="修改" onclick="updateUser('${user.id}')">
-												<input type="button" value="删除" onclick="deleteUser('${user.id}')">
+												<input type="button" value="查看" onclick="showDetail(${user.id})">
+												<input type="button" value="修改" onclick="updateUser(${user.id})">
+												<input type="button" value="删除" onclick="deleteUser(${user.id})">
 											</td>
 										</tr>
 									</c:forEach>
@@ -140,9 +140,9 @@
 											<td><fmt:formatDate value="${user.createTime}" pattern="yyyy-MM-dd"/> </td>
 											<td><fmt:formatDate value="${user.updateTime}" pattern="yyyy-MM-dd"/></td>
 											<td>
-												<input type="button" value="查看" onclick="showDetail('${user.id}')">
-												<input type="button" value="修改" onclick="updateUser('${user.id}')">
-												<input type="button" value="删除" onclick="deleteUser('${user.id}')">
+												<input type="button" value="查看" onclick="showDetail(${user.id})">
+												<input type="button" value="修改" onclick="updateUser(${user.id})">
+												<input type="button" value="删除" onclick="deleteUser(${user.id})">
 											</td>
 										</tr>
 									</c:forEach>

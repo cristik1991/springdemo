@@ -60,7 +60,7 @@ public class UserController extends BaseController{
      */
     @ResponseBody
     @RequestMapping(value="/deleteuser")
-    public String deleteUserById(String id, ModelMap model) {
+    public String deleteUserById(Integer id, ModelMap model) {
         boolean flag = userService.deleteUser(id);
         if (flag) {
             return success("删除成功");
@@ -77,7 +77,7 @@ public class UserController extends BaseController{
      * @return
      */
     @RequestMapping("/toupdateuser")
-    public String toUpdateUser(String id,ModelMap model){
+    public String toUpdateUser(Integer id,ModelMap model){
         User user = userService.getUserById(id);
         model.put("user",user);
         return "/user/updateuser";
@@ -175,7 +175,7 @@ public class UserController extends BaseController{
      * @return
      */
     @RequestMapping("/detail")
-    public String getUserById(String id, ModelMap model){
+    public String getUserById(Integer id, ModelMap model){
         User user = userService.getUserById(id);
         model.put("user",user);
         return "/user/userdetail";
