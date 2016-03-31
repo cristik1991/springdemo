@@ -17,9 +17,14 @@ public class SessionHelper {
         return request.getSession();
     }
 
-    public static void put(User user){
+    public static void putUser(User user){
         HttpSession session = getSession();
         session.setAttribute("user",user);
+    }
+
+    public static User getUser(){
+        HttpSession session = getSession();
+        return (User)session.getAttribute("user");
     }
 
     public static void remove(){
