@@ -37,6 +37,9 @@
   <listener>
     <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
   </listener>
+  <!--<listener>
+    <listener-class>com.cristik.framework.listener.DictionaryCacheListener</listener-class>
+  </listener>-->
   <!-- listener end -->
 
   <!-- filter begin -->
