@@ -1,10 +1,15 @@
 package com.cristik.business.entity.svo;
 
+import com.cristik.business.cache.DictionaryCache;
+import com.cristik.business.service.DictionaryService;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Table(name="user")
-public class User {
+public class User implements Serializable{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
@@ -95,7 +100,6 @@ public class User {
     public Integer getStatus() {
         return status;
     }
-
     public void setStatus(Integer status) {
         this.status = status;
     }
